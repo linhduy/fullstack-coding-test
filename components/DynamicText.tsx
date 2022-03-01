@@ -16,7 +16,7 @@ const DynamicText = (props, ref: Ref<DynamicTextRefObject>) => {
     setValue(newValue);
   };
 
-  return <Heading as='h1'>
+  return <Heading as='h1' wordBreak='break-word'>
     {value}
   </Heading>
 };
