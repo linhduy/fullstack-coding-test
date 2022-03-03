@@ -7,6 +7,10 @@
   align-items: center;
 }
 
+.header {
+  width: 100%;
+}
+
 .main {
   padding: 5rem 0;
   flex: 1;

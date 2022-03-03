@@ -1,9 +1,9 @@
 import { useRef } from "react";
+import { auth } from '../firebase/firebaseApp';
 import Head from "next/head";
 import styles from "../styles/Home.module.css";
 import DynamicText, { DynamicTextRefObject } from "components/DynamicText";
-import { Input } from "@chakra-ui/react";
-
+import { Button, Input } from "@chakra-ui/react";
 
 const Home = () => {
   const dynamicTextRef = useRef<DynamicTextRefObject>(null);
@@ -20,9 +20,13 @@ const Home = () => {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
+      <header className={styles.header}>
+        {/* temporarily use for test */}
+        <Button colorScheme='blue' float="right" onClick={() => auth.signOut()}>Signout</Button>
+      </header>
       <main className={styles.main}>
         <DynamicText ref={dynamicTextRef} />
-        <Input onChange={onChange} />
+        <Input onChange={onChange} />        
       </main>
     </div>
   );
