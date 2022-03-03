@@ -5,12 +5,11 @@ import { AuthContext } from '../firebase/context';
 import firebase, { auth } from '../firebase/firebaseApp';
 import StyledFirebaseAuth from 'react-firebaseui/StyledFirebaseAuth';
 import styles from '../styles/Signin.module.css';
+import { Spinner } from '@chakra-ui/react';
 
 const SignIn = () => {
   const router = useRouter();
-  const { user } = useContext(AuthContext);
-
-  const returnUrl = router.query.returnUrl as string || '/';
+  const { user, userLoading } = useContext(AuthContext);
 
   useEffect(() => {
     if(user) {
@@ -27,15 +26,20 @@ const SignIn = () => {
   })
 
   return <div className={styles.container}>
-  <Head>
-    <title>Coding Test Signin Page</title>
-    <link rel="icon" href="/favicon.ico" />
-  </Head>
+    <Head>
+      <title>Coding Test Signin Page</title>
+      <link rel="icon" href="/favicon.ico" />
+    </Head>
 
-  <main className={styles.main}>
-    <StyledFirebaseAuth uiConfig={uiConfig(firebase)} firebaseAuth={auth} />
-  </main>
-</div>
+    <main className={styles.main}>
+      {
+        userLoading && <Spinner />
+      }
+      {
+        (!userLoading && !user) && <StyledFirebaseAuth uiConfig={uiConfig(firebase)} firebaseAuth={auth} />
+      }
+    </main>
+  </div>
 };
 
 export default SignIn;
