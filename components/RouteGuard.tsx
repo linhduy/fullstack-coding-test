@@ -2,7 +2,7 @@ import { AuthContext } from "firebase/context";
 import { useRouter } from "next/router";
 import React from "react";
 import Link from 'next/link';
-import { Box, Center, Link as ChakraLink, Spinner, Text } from "@chakra-ui/react";
+import { Box, Center, Heading, Link as ChakraLink, Text } from "@chakra-ui/react";
 
 export interface RouteGuardProps {
   isProtected: boolean,
@@ -12,10 +12,10 @@ export const RouteGuard: React.FC<RouteGuardProps> = ({
   children,
   isProtected,
 }) => {
-  const { user } = React.useContext(AuthContext);
+  const { user, userLoading, userError } = React.useContext(AuthContext);
   const { asPath } = useRouter();
 
-  if (isProtected && !user) {
+  if (isProtected && !userLoading && !user) {
     return (
       <Box bg='gray' w='100%' p={4} color='white'>
         <Center>
@@ -31,6 +31,10 @@ export const RouteGuard: React.FC<RouteGuardProps> = ({
         </Center>
       </Box>
     )
+  }
+
+  if(isProtected && userError) {
+    return <Heading as="h4">User profile failed to load</Heading>
   }
 
   return <>{children}</>
