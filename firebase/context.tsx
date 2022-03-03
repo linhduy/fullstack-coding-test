@@ -1,19 +1,20 @@
 import React, { useEffect, useState } from "react";
 import { useRouter } from 'next/router';
-import firebase, { auth } from './firebaseApp';
+import firebase from './firebaseApp';
+import { useAuthState } from 'react-firebase-hooks/auth';
+import { getAuth } from "firebase/auth";
 
 export const AuthContext = React.createContext(null);
 
 export const AuthProvider: React.FC = ({ children }) => {
-  const router = useRouter()
-  const [user, setUser] = useState<firebase.User | null>(null);
-
-  useEffect(() => {
-    const unsubscribe = auth.onAuthStateChanged(user => setUser(user));
-    return unsubscribe;
-  }, []);
-
+  const auth = getAuth(firebase.app());
+  const [user, userLoading, userError] = useAuthState(auth);
+  
   return (
-    <AuthContext.Provider value={{ user }}>{children}</AuthContext.Provider>
+    <AuthContext.Provider
+      value={{ user, userLoading, userError }}
+    >
+      {children}
+    </AuthContext.Provider>
   );
 };
