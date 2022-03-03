@@ -28,4 +28,6 @@ const Home = () => {
   );
 };
 
+Home.protected = true;
+
 export default Home;
