@@ -1,11 +1,11 @@
 const firebaseConfig = {
-  apiKey: "AIzaSyCxamTjr49u6bGxWjkGkZY6ZyeDS76I1ME",
-  authDomain: "fullstack-coding-test-8de0e.firebaseapp.com",
-  databaseURL: "https://fullstack-coding-test-8de0e-default-rtdb.asia-southeast1.firebasedatabase.app",
-  projectId: "fullstack-coding-test-8de0e",
-  storageBucket: "fullstack-coding-test-8de0e.appspot.com",
-  messagingSenderId: "520714673631",
-  appId: "1:520714673631:web:1da2c43162e93fa75eb86a"
+  apiKey: process.env.NEXT_PUBLIC_FIREBASE_API_KEY,
+  authDomain: process.env.NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN,
+  databaseURL: process.env.NEXT_PUBLIC_FIREBASE_DATABASE_URL,
+  projectId: process.env.NEXT_PUBLIC_FIREBASE_PROJECT_ID,
+  storageBucket: process.env.NEXT_PUBLIC_FIREBASE_STORAGE_BUCKET,
+  messagingSenderId: process.env.NEXT_PUBLIC_FIREBASE_MESSAGING_SENDER_ID,
+  appId: process.env.NEXT_PUBLIC_FIREBASE_APP_ID,
 };
 
 export default firebaseConfig;
