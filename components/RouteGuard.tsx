@@ -26,7 +26,7 @@ export const RouteGuard: React.FC<RouteGuardProps> = ({
             pathname: '/signin',
             query: { returnUrl: asPath }
           }}>
-            <ChakraLink>Please signin</ChakraLink>
+            <ChakraLink textDecoration='underline'>Please signin</ChakraLink>
           </Link>
         </Center>
       </Box>
