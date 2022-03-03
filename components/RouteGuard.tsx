@@ -2,7 +2,7 @@ import { AuthContext } from "firebase/context";
 import { useRouter } from "next/router";
 import React from "react";
 import Link from 'next/link';
-import { Box, Center, Heading, Link as ChakraLink, Text } from "@chakra-ui/react";
+import { Box, Center, Heading, Link as ChakraLink, Spinner, Text } from "@chakra-ui/react";
 
 export interface RouteGuardProps {
   isProtected: boolean,
@@ -14,6 +14,10 @@ export const RouteGuard: React.FC<RouteGuardProps> = ({
 }) => {
   const { user, userLoading, userError } = React.useContext(AuthContext);
   const { asPath } = useRouter();
+
+  if(isProtected && userLoading) {
+    return <Spinner />
+  }
 
   if (isProtected && !userLoading && !user) {
     return (
